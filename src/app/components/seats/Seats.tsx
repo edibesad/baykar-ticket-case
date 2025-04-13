@@ -39,7 +39,7 @@ export const Seats = () => {
   }
 
   return (
-    <div className="bg-gray-100 flex flex-col gap-12 py-12 px-64 w-full h-full justify-center items-center">
+    <div className="flex flex-col gap-12 py-12 px-64 w-full h-full justify-center items-center">
       <SeatGrid seats={seats} />
       <SeatInfo />
     </div>

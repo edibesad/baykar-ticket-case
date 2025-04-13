@@ -2,7 +2,9 @@
 @import "react-tooltip/dist/react-tooltip.css";
 
 :root {
-  --background: #ffffff;
+  --primary: #c6c6c6;
+  --secondary: #f7cc6e;
+  --bacground: #f7f7f7;
 }
 
 @theme inline {
@@ -13,7 +15,7 @@
 }
 
 body {
-  background: var(--background);
+  background: var(--bacground);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }

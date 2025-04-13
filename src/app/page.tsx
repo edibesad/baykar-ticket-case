@@ -3,10 +3,12 @@ import { Seats } from "./components/seats/Seats";
 
 export default function Home() {
   return (
-    <div className="container mx-auto p-12">
-      <div className="grid grid-cols-2 w-full items-center justify-center">
+    <div className="h-screen w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 h-full">
         <Seats />
-        <Payment />
+        <div>
+          <Payment />
+        </div>
       </div>
     </div>
   );

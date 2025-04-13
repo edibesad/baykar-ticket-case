@@ -12,30 +12,30 @@ export const SeatCard = ({
   user: UserType | undefined;
   seatNumber: number;
 }) => {
-  const seatStore = useStore((state) => state.selectedSeats);
-  const isSelected = seatStore.includes(seatNumber);
+  const { selectedSeats, setSelectedSeats } = useStore((state) => state);
+  const isSelected = selectedSeats.some(
+    (seat) => seat.seatNumber === seatNumber
+  );
 
   const selectSeat = () => {
     if (user && !isSelected) {
       alert("Bu koltuk zaten dolu.");
       return;
     }
-    if (seatStore.length == 3 && !isSelected) {
+    if (selectedSeats.length == 3 && !isSelected) {
       alert("En fazla 3 koltuk seçebilirsiniz.");
       return;
     }
     if (!isSelected) {
-      useStore.setState((state) => ({
-        selectedSeats: [...state.selectedSeats, seatNumber],
-      }));
+      setSelectedSeats([
+        ...selectedSeats,
+        { user: {}, seatNumber: seatNumber },
+      ]);
     } else {
-      useStore.setState((state) => ({
-        selectedSeats: state.selectedSeats.filter(
-          (seat) => seat !== seatNumber
-        ),
-      }));
+      setSelectedSeats(
+        selectedSeats.filter((seat) => seat.seatNumber !== seatNumber)
+      );
     }
-    console.log("useStore.selectedSeats", seatStore);
   };
 
   return (

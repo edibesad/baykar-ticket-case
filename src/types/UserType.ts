@@ -1,23 +1,8 @@
 export interface UserType {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-  address: {
-    street: string;
-    suite: string;
-    city: string;
-    zipcode: string;
-    geo: {
-      lat: string;
-      lng: string;
-    };
-  };
-  phone: string;
-  website: string;
-  company: {
-    name: string;
-    catchPhrase: string;
-    bs: string;
-  };
+  name?: string | undefined;
+  surname?: string | undefined;
+  email?: string | undefined;
+  phone?: string | undefined;
+  gender?: "male" | "female" | undefined;
+  birthDate?: string | undefined;
 }

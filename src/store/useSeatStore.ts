@@ -1,15 +1,36 @@
+import {
+  saveToSessionStorage,
+  getFromSessionStorage,
+  removeFromSessionStorage,
+} from "@/helpers/sessionStorageHelper";
+import { UserType } from "@/types/UserType";
 import { create } from "zustand";
 
 interface SeatStore {
-  selectedSeats: number[];
-  setSelectedSeats: (seats: number[]) => void;
+  selectedSeats: SeatStoreData[];
+  setSelectedSeats: (seats: SeatStoreData[]) => void;
   clearSelectedSeats: () => void;
 }
 
-const useStore = create<SeatStore>((set) => ({
-  selectedSeats: [],
-  setSelectedSeats: (seats) => set({ selectedSeats: seats }),
-  clearSelectedSeats: () => set({ selectedSeats: [] }),
-}));
+export interface SeatStoreData {
+  user: UserType;
+  seatNumber: number;
+}
+
+const useStore = create<SeatStore>((set) => {
+  const initialSelectedSeats = getFromSessionStorage("selectedSeats") || [];
+
+  return {
+    selectedSeats: initialSelectedSeats,
+    setSelectedSeats: (seats) => {
+      saveToSessionStorage("selectedSeats", seats);
+      set({ selectedSeats: seats });
+    },
+    clearSelectedSeats: () => {
+      set({ selectedSeats: [] });
+      removeFromSessionStorage("selectedSeats");
+    },
+  };
+});
 
 export default useStore;

@@ -13,11 +13,11 @@ export const SeatContent = ({ state }: SeatContentProps) => {
 function generateColor(state: "available" | "selected" | "booked") {
   switch (state) {
     case "available":
-      return "bg-white";
+      return "";
     case "selected":
-      return "bg-yellow-200";
+      return "bg-[var(--secondary)]";
 
     case "booked":
-      return "bg-gray-200";
+      return "bg-[var(--primary)]";
   }
 }
