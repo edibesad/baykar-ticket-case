@@ -4,6 +4,8 @@ import useStore from "@/store/useSeatStore";
 import { UserType } from "@/types/UserType";
 import { Tooltip } from "react-tooltip";
 import { SeatContent } from "./SeatContent";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const SeatCard = ({
   user,
@@ -19,11 +21,11 @@ export const SeatCard = ({
 
   const selectSeat = () => {
     if (user && !isSelected) {
-      alert("Bu koltuk zaten dolu.");
+      toast.error("Bu koltuk zaten dolu.");
       return;
     }
     if (selectedSeats.length == 3 && !isSelected) {
-      alert("En fazla 3 koltuk seçebilirsiniz.");
+      toast.error("En fazla 3 koltuk seçebilirsiniz.");
       return;
     }
     if (!isSelected) {

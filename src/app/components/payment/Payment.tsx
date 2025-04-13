@@ -4,6 +4,7 @@ import useStore from "@/store/useSeatStore";
 import { Accordion } from "./components/Accordion";
 import { useEffect, useState } from "react";
 import { Total } from "./components/Total";
+import { toast } from "react-toastify";
 
 export const Payment = () => {
   const [hydrated, setHydrated] = useState(false);
@@ -19,7 +20,7 @@ export const Payment = () => {
     e.preventDefault();
 
     if (selectedSeats.length === 0) {
-      alert("Lütfen en az bir koltuk seçin.");
+      toast.error("Lütfen en az bir koltuk seçin.");
       return;
     }
 
@@ -34,14 +35,14 @@ export const Payment = () => {
         !seat.user.phone ||
         !seat.user.surname
       ) {
-        alert(`Lütfen ${index + 1}. yolcunun bilgilerini doldurun.`);
+        toast.error(`Lütfen ${index + 1}. yolcunun bilgilerini doldurun.`);
         return;
       }
 
       if (seat.user.email) {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailPattern.test(seat.user.email)) {
-          alert(
+          toast.error(
             `Lütfen ${index + 1}. yolcunun geçerli bir e-posta adresi girin.`
           );
           return;
@@ -49,9 +50,11 @@ export const Payment = () => {
       }
     }
 
-    alert("Rezervasyon işlemi başarıyla tamamlandı");
     clearSelectedSeats();
-    window.location.reload();
+    toast.success("Rezervasyon işlemi başarıyla tamamlandı", {
+      autoClose: 500,
+      onClose: () => window.location.reload(),
+    });
   };
 
   return (
